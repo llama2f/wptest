@@ -26,7 +26,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _js_
   \*************************/
 /***/ (function() {
 
-eval("// スクロールトップボタン\nvar gotop = function gotop() {\n  window.scrollTo({\n    top: 0,\n    behavior: 'smooth'\n  });\n};\n\nwindow.gotop = gotop;\n\n//# sourceURL=webpack://wptest/./src/js/gotop.js?");
+eval("// スクロールトップボタン\nvar gotop = function gotop() {\n  window.scrollTo({\n    top: 0,\n    behavior: 'smooth'\n  });\n  console.log(\"トップにいくよ\");\n};\n\nwindow.gotop = gotop;\n\n//# sourceURL=webpack://wptest/./src/js/gotop.js?");
 
 /***/ }),
 

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ja" class="no-js">
+<html lang="ja">
   <head>
     <?php $desc = get_bloginfo('description'); //説明文定義 ?>
     <?php $title = get_the_title()  . " | " . get_bloginfo( 'name' ); ?>
@@ -16,6 +16,7 @@
 
     <link rel="stylesheet" href="<?php bloginfo( 'stylesheet_url' ); ?>" type="text/css" media="screen" />
     <link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
+    <script type='text/javascript' src='<?php echo get_template_directory_uri(); ?>/main.js' async></script>
 
     <!-- 要編集 -->
     <link rel="stylesheet" href="/assets/css/print.css" media="print" />
