@@ -1,5 +1,17 @@
 <footer id="footer" role="contentinfo">
-  <nav class="footer-nav">フッターナビ</nav>
+  <?php //フッターメニュー
+          $defaults = array(
+            'menu'            => '',
+            'menu_class'      => 'footer-menu',
+            'container'       => 'nav',
+            'container_class' => 'footer-nav',
+            'depth'           => 0,
+            'theme_location'  => 'footer',
+            'items_wrap'      => '<ul class="%2$s">%3$s</ul>',
+            'walker'          => new nav_walker()
+          );
+          wp_nav_menu( $defaults );
+?>
   <p class="copyright">コピーライト</p>
 </footer>
 <?php wp_footer(); ?>
