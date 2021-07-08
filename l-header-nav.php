@@ -4,8 +4,9 @@
           $defaults = array(
             'menu'            => '',
             'menu_class'      => 'main-menu',
-            'container'       => 'nav',
-            'container_class' => 'header-nav',
+            'container'       => 'nav',            
+            'container_id'         =>'header-nav',
+            'container_class' => 'nav-wrapper',
             'depth'           => 0,
             'theme_location'  => 'header',
             'items_wrap'      => '<ul class="%2$s">%3$s</ul>',

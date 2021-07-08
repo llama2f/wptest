@@ -2,11 +2,17 @@
 <html lang="ja">
   <head>
     <?php $desc = get_bloginfo('description'); //説明文定義 ?>
-    <?php $title = get_the_title()  . " | " . get_bloginfo( 'name' ); ?>
+    <?php if (is_home() || is_front_page()) { //タイトルタグ定義
+        $title = get_bloginfo( 'name' );}
+      elseif( is_404() ){
+        $title="404" . "|"  . get_bloginfo( 'name' );}
+      else{
+        $title = get_the_title()  . " | " . get_bloginfo( 'name' );
+    }?>
     <?php if ( is_home() || is_front_page() ) { //url定義
         $pageurl =  get_bloginfo( 'url' );}
      else {
-        $pageurl = wp_get_document_title(); 
+        $pageurl = get_the_permalink(); 
     }?>
 
     <meta charset="UTF-8" />
@@ -50,13 +56,8 @@ if ( is_singular() ) {
   </head>
   <!-- end head -->
 
-  <body <?php body_class(); ?>>
-    <div id="root">
-      <header id="header" role="banner">
-        <h1 class="header-title"><a href="<?php echo home_url(); ?>/"><?php bloginfo( 'name' ); ?></a></h1>
-        <div class="description"><?php bloginfo( 'description' ); ?></div>
+  <?php get_template_part( 'header-inner') //基本のヘッダーコンテンツ ?>
 
+  <?php get_template_part( 'l-header-nav') //ヘッダーメニュー ?>
 
-        <?php get_template_part( 'l-header-nav') //ヘッダーメニュー ?>
-
-      </header>
+  </header>

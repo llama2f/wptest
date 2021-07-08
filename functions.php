@@ -13,8 +13,8 @@ remove_action('wp_print_styles', 'print_emoji_styles');
 add_filter('emoji_svg_url', '__return_false');
 
 /* WP5.x.xのブロックエディタ用スタイルの排除 */
-wp_deregister_style('wp-block-library');
-wp_deregister_style('wp-block-library-theme');
+//wp_deregister_style('wp-block-library');
+//wp_deregister_style('wp-block-library-theme');
 
 // 投稿、コメントのフィードに関するlinkタグを削除
 remove_action('wp_head', 'feed_links', 2);
@@ -76,11 +76,18 @@ add_action('wp_footer','comment_js_queue');
 //必要項目追加
 /////////////////////////////
 
-//メニュー追加
-add_action( 'after_setup_theme', 'register_menu' );
-function register_menu() {
+//エディターのcss追加
+//add_editor_style( 'style-editor.css' );
+//add_theme_support("editor-styles");
+
+
+//アイキャッチ許可、メニュー許可
+function eyecatch_setup() {
+   add_theme_support( 'post-thumbnails' );   
   register_nav_menu( 'primary', __( 'Primary Menu', 'theme-slug' ) );
 }
+add_action( 'after_setup_theme', 'eyecatch_setup' );
+
 //メニュー位置追加
 register_nav_menus( array(
    'header' => 'ヘッダーメニュー',
@@ -168,3 +175,22 @@ function start_lvl(&$output, $depth = 0, $args = NULL)  {
 
   }
 }
+
+//
+//設定ページ作成
+//
+ add_action('admin_menu', 'option_menu');
+
+ function option_menu() {
+   add_menu_page('サイト設定管理', 'サイト設定管理', 'administrator' , 'option_menu', 'options_page');
+   add_action( 'admin_init', 'register_settings' );
+ }
+
+ require ( dirname(__FILE__) . '/option.php');
+ function register_settings() {
+   register_settings_detail() ;
+ }
+
+ function options_page() {
+   options_page_detail() ;
+ }

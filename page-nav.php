@@ -1,0 +1,1 @@
+<?php wp_link_pages( 'before=<div id="page-links">&after=</div>' ); ?>
