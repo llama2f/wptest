@@ -80,6 +80,11 @@ add_action('wp_footer','comment_js_queue');
 //add_editor_style( 'style-editor.css' );
 //add_theme_support("editor-styles");
 
+//固定ページで自動整形なし
+if ( is_page() ) {
+  remove_filter('the_content', 'wpautop');
+  remove_filter('the_excerpt', 'wpautop');
+}
 
 //アイキャッチ許可、メニュー許可
 function eyecatch_setup() {
@@ -93,8 +98,9 @@ register_nav_menus( array(
    'header' => 'ヘッダーメニュー',
    'footer' => 'フッターメニュー'
 ) );
-//メニューliのid削除
 
+
+//メニューliのid削除
 function my_nav_menu_id( $menu_id ){
 $id = NULL;
 return $id;
@@ -103,7 +109,6 @@ add_filter( 'nav_menu_item_id', 'my_nav_menu_id' );
 
 
 //liのclass削除
-
 function my_nav_menu_class( $classes, $item ){
 if( $classes[0] ){
 array_splice( $classes, 1 );
@@ -176,21 +181,18 @@ function start_lvl(&$output, $depth = 0, $args = NULL)  {
   }
 }
 
-//
-//設定ページ作成
-//
- add_action('admin_menu', 'option_menu');
+//ウィジェット追加
+function my_theme_widgets_init() {
+  register_sidebar( array(
+    'name' => 'Sidebar',
+    'id' => 'main-sidebar',
+    'before_widget' => '<section id="%1$s" class="sidebar-widget">',
+    'after_widget' => '</section>',
+    'before_title' => '<h3 class="sidebar_title">',
+    'after_title'  => '</h3>',
+  ) );
+}
+add_action( 'widgets_init', 'my_theme_widgets_init' );
 
- function option_menu() {
-   add_menu_page('サイト設定管理', 'サイト設定管理', 'administrator' , 'option_menu', 'options_page');
-   add_action( 'admin_init', 'register_settings' );
- }
-
- require ( dirname(__FILE__) . '/option.php');
- function register_settings() {
-   register_settings_detail() ;
- }
-
- function options_page() {
-   options_page_detail() ;
- }
+//カスタマイザー追加
+require (get_template_directory().'/function/customizer.php');

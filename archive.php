@@ -10,7 +10,8 @@ if ( have_posts() ) {
 
   <article>
     <h2><a href="<?php echo get_permalink(); ?>"><?php the_title(); ?></a></h2>
-    <?php get_template_part('template/postdate');?>
+    <?php get_template_part('template/post_date');?>
+    <?php get_template_part('template/post_category');?>
     <a href="<?php echo get_permalink(); ?>"><?php the_excerpt(); ?></a>
   </article>
 

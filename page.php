@@ -1,19 +1,14 @@
 <?php get_header(); ?>
 
-<main id="main">
-
-  <?php
+<?php get_template_part( 'template/mainArea' ) ?>
+<?php
 if ( have_posts() ) {
 	while ( have_posts() ) {
-
 		the_post(); ?>
 
-  <h2>固定ページpage.phpの<?php the_title(); ?></h2>
-
-  <?php the_content(); ?>
-
-  <?php 
-  get_template_part( 'template/comment');
+<?php get_template_part( 'template/contentArea' ) ?>
+<aside class=" sidebar"><?php dynamic_sidebar('main-sidebar'); ?></aside>
+<?php 
   }
 }
 ?>

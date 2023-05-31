@@ -21,14 +21,16 @@
     <title><?php echo $title; ?></title>
 
     <link rel="stylesheet" href="<?php bloginfo( 'stylesheet_url' ); ?>" type="text/css" media="screen" />
+    <?php get_template_part( 'js/menu_openclose') ?>
+
     <link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
-    <script type='text/javascript' src='<?php echo get_template_directory_uri(); ?>/main.js' async></script>
 
-    <!-- 要編集 -->
+
+    <!-- 要編集 
     <link rel="stylesheet" href="/assets/css/print.css" media="print" />
-
-
-    <!-- 要編集 -->
+    //アナリティクスコード 
+        -->
+    <!-- meta/ogp -->
     <meta name="description" content="<?php echo $desc ?>" />
     <meta property="og:title" content="<?php echo $title ?>" />
     <meta property="og:description" content="<?php echo $desc ?>" />
@@ -41,11 +43,17 @@
     <link rel="canonical" href="<?php echo $pageurl ?>" />
     <base href="<?php echo $pageurl ?>" />
 
-    <!-- 要編集 -->
+    <!-- favicon -->
     <link rel="icon" href="/favicon.ico" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/my.webmanifest" />
+
+    <?php   
+  global $is_IE;
+  if($is_IE){
+     include('ie_polyfill.php');
+    } ?>
 
     <?php
 //個別投稿で反映、コメント返信時にフォームが寄ってくる
@@ -56,8 +64,9 @@ if ( is_singular() ) {
   </head>
   <!-- end head -->
 
+
   <?php get_template_part( 'header-inner') //基本のヘッダーコンテンツ ?>
 
-  <?php get_template_part( 'l-header-nav') //ヘッダーメニュー ?>
+  <?php get_template_part( '/template/l-header-nav') //ヘッダーメニュー ?>
 
   </header>
